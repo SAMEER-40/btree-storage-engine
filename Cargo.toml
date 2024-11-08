@@ -2,6 +2,12 @@
 name = "storagedb"
 version = "0.1.0"
 edition = "2021"
-description = "A database storage engine with B+ tree indexing"
+description = "A database storage engine with B+ tree indexing, WAL, buffer pool, and ACID transactions"
 
 [dependencies]
+
+[dev-dependencies]
+
+[[bench]]
+name = "engine_bench"
+harness = false
