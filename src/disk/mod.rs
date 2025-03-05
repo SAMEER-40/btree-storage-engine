@@ -1,5 +1,5 @@
-pub mod page;
 pub mod disk_manager;
+pub mod page;
 
-pub use page::{Page, PageId, PAGE_SIZE, HEADER_SIZE};
 pub use disk_manager::DiskManager;
+pub use page::{Page, PageId, HEADER_SIZE, PAGE_SIZE};

@@ -23,10 +23,7 @@ impl BPlusTree {
     }
 
     pub fn open(disk: DiskManager, root_page_id: PageId) -> Self {
-        BPlusTree {
-            root_page_id,
-            disk,
-        }
+        BPlusTree { root_page_id, disk }
     }
 
     pub fn disk_manager(&self) -> &DiskManager {
@@ -273,11 +270,7 @@ impl BPlusTree {
         Ok(result)
     }
 
-    pub fn range_scan(
-        &mut self,
-        start: &[u8],
-        end: &[u8],
-    ) -> Result<Vec<(Vec<u8>, Vec<u8>)>> {
+    pub fn range_scan(&mut self, start: &[u8], end: &[u8]) -> Result<Vec<(Vec<u8>, Vec<u8>)>> {
         let leaf_id = self.find_leaf(start)?;
         let mut current_id = leaf_id;
         let mut result = Vec::new();
@@ -387,7 +380,12 @@ mod tests {
             let key = format!("key{:05}", i);
             let val = format!("val{:05}", i);
             let result = tree.search(key.as_bytes()).unwrap();
-            assert_eq!(result, Some(val.as_bytes().to_vec()), "Failed at key {}", key);
+            assert_eq!(
+                result,
+                Some(val.as_bytes().to_vec()),
+                "Failed at key {}",
+                key
+            );
         }
     }
 
@@ -439,7 +437,12 @@ mod tests {
                 assert_eq!(result, None, "Should be deleted: {}", key);
             } else {
                 let val = format!("v{:06}", i);
-                assert_eq!(result, Some(val.as_bytes().to_vec()), "Should exist: {}", key);
+                assert_eq!(
+                    result,
+                    Some(val.as_bytes().to_vec()),
+                    "Should exist: {}",
+                    key
+                );
             }
         }
     }
